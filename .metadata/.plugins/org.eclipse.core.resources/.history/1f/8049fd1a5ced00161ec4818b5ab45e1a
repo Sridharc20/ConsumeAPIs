@@ -1,0 +1,12 @@
+package com.example;
+
+public class Customer {
+
+	
+private String firstName;
+private String lastName;
+private String place;
+
+
+
+}

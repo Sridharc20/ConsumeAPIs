@@ -1,0 +1,24 @@
+package com.example;
+
+public class Customer {
+
+	
+private String firstName;
+private String lastName;
+private String place;
+
+
+private Customer() {
+}
+
+
+public Customer(String firstName, String lastName, String place) {
+
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.place = place;
+}
+
+
+
+}
