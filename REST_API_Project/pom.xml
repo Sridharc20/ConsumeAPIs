@@ -22,6 +22,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<!-- Docker maven Plugin -->
+		<docker.image.prefix>sridharc20</docker.image.prefix>
+		<push.image>false</push.image>
+		<maven-clean-plugin.version>2.5</maven-clean-plugin.version>
+		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+		<docker-maven-plugin-spotify.version>0.4.10</docker-maven-plugin-spotify.version>
+		<!-- Docker maven Plugin -->
 	</properties>
 
 	<dependencies>
@@ -47,6 +54,42 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
+			<!-- Docker Plugin -->
+						<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>${docker-maven-plugin-spotify.version}</version>
+				<!-- Include: export DOCKER_HOST=tcp://docker:4243 in host executing 
+					mvn docker:build -->
+				<configuration>
+					<!-- One or the other -->
+					<!-- First add server entry in settings.xml -->
+					<serverId>docker-hub</serverId>
+					<!-- Uses ~/.docker/config.json created once logged in using "docker 
+						login" command -->
+					<!-- <useConfigFile>true</useConfigFile> -->
+
+					<imageName>${docker.image.prefix}/${project.artifactId}:${project.version}</imageName>
+					<pushImage>false</pushImage>
+					<forceTags>true</forceTags>
+					<imageTags>
+						<imageTag>${project.version}</imageTag>
+					</imageTags>
+					<dockerDirectory>src/main/docker</dockerDirectory>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+			
+			<!-- Docker Plugin -->
+			
+			
 		</plugins>
 	</build>
 

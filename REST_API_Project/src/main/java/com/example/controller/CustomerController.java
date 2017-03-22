@@ -21,36 +21,35 @@ import com.example.Customer;
  */
 @RestController
 public class CustomerController {
-	
+
 	@Autowired
 	private CustomerService cs;
-	
-	
+
 	@RequestMapping("/customers")
-	public List<Customer> getAllCustomers(){
-		return cs.getCustomers();				
+	public List<Customer> getAllCustomers() {
+		return cs.getCustomers();
 	}
 
 	@RequestMapping("/customers/{firstName}")
-	public Customer getCustomer(@PathVariable String firstName){
-		return cs.getCustomer(firstName);				
+	public Customer getCustomer(@PathVariable String firstName) {
+		return cs.getCustomer(firstName);
 	}
 
-	@RequestMapping(method=RequestMethod.POST, value="/customers")
-	public void addCustomer(@RequestBody Customer c){
-		cs.addCustomer(c);	
+	@RequestMapping(method = RequestMethod.POST, value = "/customers")
+	public void addCustomer(@RequestBody Customer c) {
+		cs.addCustomer(c);
 	}
-	
-	@RequestMapping(method=RequestMethod.PUT, value="/customers/{firstName}")
-	public void updateCustomer(@RequestBody Customer c,@PathVariable String firstName){
-		cs.updateCustomer(firstName,c);	
-		
+
+	@RequestMapping(method = RequestMethod.PUT, value = "/customers/{firstName}")
+	public void updateCustomer(@RequestBody Customer c, @PathVariable String firstName) {
+		cs.updateCustomer(firstName, c);
+
 	}
-	
-	@RequestMapping(method=RequestMethod.DELETE, value="/customers/{firstName}")
-	public void deleteCustomer(@PathVariable String firstName){
-		cs.deleteCustomer(firstName);	
-		
+
+	@RequestMapping(method = RequestMethod.DELETE, value = "/customers/{firstName}")
+	public void deleteCustomer(@PathVariable String firstName) {
+		cs.deleteCustomer(firstName);
+
 	}
-	
+
 }
